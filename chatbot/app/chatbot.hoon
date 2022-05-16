@@ -116,12 +116,7 @@
     :~  [%mention ship=tag]  [%text text=': ack']  ==
   ?:  =('o7' text)
     :~  [%text text='o7']  ==
-  ?:  =('!bot' text)
-    :~  [%text text='**Gerhana Chatbot**']
-        [%text text='A fork of dcspark-chatbot']
-        [%text text='Source code:']
-        [%url url='https://github.com/nallux-dozryl/gerhana-chatbot']
-    ==
+  ?:  =('!bot' text)  (bot-details)
   ?:  =('!forms' text)
     :~  [%text text='Proposal:']
         [%url url='https://urbit.org/grants/urbit-forms']
@@ -145,7 +140,18 @@ o7       -> o7
 ```
 '''
 ::
-
+++  bot-details
+  |.
+  ^-  (list content:gspost)
+  :~  :-  %text  =/  text
+      '''
+      **Gerhana Chatbot**
+      A fork of dcspark-chatbot
+      Source code:
+      '''  text
+      [%url url='https://github.com/nallux-dozryl/gerhana-chatbot']
+  ==
+::
 ++  start
   |.
   ^-  (list content:gspost)
