@@ -110,9 +110,26 @@
 ++  react
   |=  [tag=@p text=@t]
   ^-  (list content:gspost)
-  ?:  =('!help' text)  ~[[%text text=(help-message)]]
-  ?:  =('.' text)  ~[[%mention ship=tag] [%text text=': ack']]
-  ?:  =('o7' text)  ~[[%text text='o7']]
+  ?:  =('!help' text)
+    :~  [%text text=(help-message)]  ==
+  ?:  =('.' text)
+    :~  [%mention ship=tag]  [%text text=': ack']  ==
+  ?:  =('o7' text)
+    :~  [%text text='o7']  ==
+  ?:  =('!bot' text)
+    :~  [%text text='**Gerhana Chatbot**']
+        [%text text='A fork of dcspark-chatbot']
+        [%text text='Source code:']
+        [%url url='https://github.com/nallux-dozryl/gerhana-chatbot']
+    ==
+  ?:  =('!forms' text)
+    :~  [%text text='Proposal:']
+        [%url url='https://urbit.org/grants/urbit-forms']
+        [%text text='Discussion:']
+        [%reference reference=[%graph group=[entity=~donpub-datdux name=%gerhana-network] uid=[resource=[entity=~possum-donpub-datdux name=%forms-discussion-5011] index=~]]]
+        [%text text='Source code:']
+        [%url url='https://github.com/nallux-dozryl/urbit-forms']
+    ==
   ?:  =('!start' text)  (start)  ~
 ++  help-message
 |.
@@ -121,6 +138,8 @@ Gerhana Bot
 ```
 !start   -> Kickstart your exploration
 !help    -> Display this menu
+!bot     -> Bot information
+!forms   -> Urbit Forms Information
 .        -> Your dot will be acked automatically
 o7       -> o7
 ```
